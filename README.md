@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -7,127 +6,130 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* ══════════════════════════════
+   RESET & BASE
+══════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{
-  background:#000;
-  color:#fff;
+  background:#000;color:#fff;
   font-family:'DM Mono',monospace;
-  font-size:14px;
-  line-height:1.7;
-  overflow-x:hidden;
-  cursor:none;
+  font-size:14px;line-height:1.7;
+  overflow-x:hidden;cursor:none;
 }
 img,video{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 
-/* CURSOR */
+/* ── SYSTEM FONT (SF Pro on Apple, Segoe on Windows, Roboto on Android) ── */
+:root{
+  --font-sys: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+              "SF Pro Text", "Helvetica Neue", Arial, "Segoe UI",
+              Roboto, sans-serif;
+}
+
+/* ══════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════ */
 .cursor{
-  position:fixed;width:12px;height:12px;
-  background:#fff;border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width .2s,height .2s,background .2s;
-  mix-blend-mode:difference;
+  position:fixed;width:12px;height:12px;background:#fff;border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;mix-blend-mode:difference;
 }
 .cursor-ring{
-  position:fixed;width:36px;height:36px;
-  border:1px solid rgba(255,255,255,.4);border-radius:50%;
-  pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);
+  position:fixed;width:36px;height:36px;border:1px solid rgba(255,255,255,.4);border-radius:50%;
+  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
   transition:width .2s,height .2s,border-color .2s;
 }
 
-/* GRAIN */
+/* ══════════════════════════════
+   FILM GRAIN OVERLAY
+══════════════════════════════ */
 .grain{
-  position:fixed;inset:0;z-index:9990;
-  pointer-events:none;opacity:.12;
+  position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.12;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat:repeat;
-  background-size:200px 200px;
+  background-repeat:repeat;background-size:200px 200px;
   animation:grainShift .08s steps(1) infinite;
 }
 @keyframes grainShift{
-  0%{background-position:0 0;}
-  10%{background-position:-5% -10%;}
-  20%{background-position:-15% 5%;}
-  30%{background-position:7% -25%;}
-  40%{background-position:-5% 25%;}
-  50%{background-position:-15% 10%;}
-  60%{background-position:15% 0%;}
-  70%{background-position:0 15%;}
-  80%{background-position:3% 35%;}
-  90%{background-position:-10% 10%;}
+  0%{background-position:0 0;}10%{background-position:-5% -10%;}
+  20%{background-position:-15% 5%;}30%{background-position:7% -25%;}
+  40%{background-position:-5% 25%;}50%{background-position:-15% 10%;}
+  60%{background-position:15% 0%;}70%{background-position:0 15%;}
+  80%{background-position:3% 35%;}90%{background-position:-10% 10%;}
   100%{background-position:0 0;}
 }
 
-/* NAV */
+/* ══════════════════════════════
+   NAVIGATION
+══════════════════════════════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:1.4rem 3rem;
-  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;
 }
 nav::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,.75),transparent);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  z-index:-1;
+  background:linear-gradient(to bottom,rgba(0,0,0,.8),transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:-1;
 }
 .nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.6rem;font-weight:300;letter-spacing:.08em;color:#fff;
-  cursor:pointer;
+  font-family:'Cormorant Garamond',serif;font-size:1.6rem;
+  font-weight:300;letter-spacing:.08em;color:#fff;cursor:pointer;
 }
 .nav-logo span{font-style:italic;}
-.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;flex-wrap:wrap;}
 .nav-links a{
   font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,.45);transition:color .25s;
-  position:relative;
+  color:rgba(255,255,255,.45);transition:color .25s;position:relative;
 }
 .nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;right:0;
-  height:1px;background:currentColor;
-  transform:scaleX(0);transform-origin:right;
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:right;
   transition:transform .3s ease;
 }
 .nav-links a:hover{color:#fff;}
 .nav-links a:hover::after{transform:scaleX(1);transform-origin:left;}
 
-/* PAGE SYSTEM */
+/* ══════════════════════════════
+   PAGE SYSTEM
+══════════════════════════════ */
 .page{display:none;min-height:100vh;position:relative;overflow:hidden;}
 .page.active{display:block;}
+#page-home.active{display:flex;flex-direction:column;}
+#page-about.active{display:flex;flex-direction:column;}
 
-/* PAGE CURTAIN */
+/* ── PAGE TRANSITION CURTAIN ── */
 .page-curtain{
-  position:fixed;inset:0;z-index:2000;
-  background:#000;transform:translateY(-100%);pointer-events:none;
+  position:fixed;inset:0;z-index:2000;background:#000;
+  transform:translateY(-100%);pointer-events:none;
 }
 .page-curtain.in{animation:curtainIn .5s cubic-bezier(.76,0,.24,1) forwards;}
 .page-curtain.out{animation:curtainOut .5s cubic-bezier(.76,0,.24,1) forwards;}
 @keyframes curtainIn{from{transform:translateY(100%);}to{transform:translateY(0);}}
 @keyframes curtainOut{from{transform:translateY(0);}to{transform:translateY(-100%);}}
 
-/* REVEAL */
+/* ── SCROLL REVEAL ── */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease;}
 .reveal.visible{opacity:1;transform:none;}
 
-/* BACK BUTTON */
+/* ══════════════════════════════
+   BACK BUTTON
+══════════════════════════════ */
 .back-btn{
-  position:fixed;bottom:2.5rem;left:clamp(2rem,6vw,6rem);
-  z-index:500;display:none;align-items:center;gap:.7rem;
-  font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,.4);cursor:pointer;transition:color .2s;
-  background:rgba(0,0,0,.4);padding:.7rem 1.2rem;
-  border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);
+  position:fixed;bottom:2.5rem;left:clamp(2rem,6vw,6rem);z-index:500;
+  display:none;align-items:center;gap:.7rem;font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;
+  transition:color .2s,border-color .2s;
+  background:rgba(0,0,0,.6);padding:.8rem 1.4rem;
+  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
-.back-btn:hover{color:#fff;}
+.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
 .back-btn.visible{display:flex;}
 
-/* ── HOME ── */
+/* ══════════════════════════════
+   HOME PAGE
+══════════════════════════════ */
 #page-home{background:#000;}
-#page-home.active{display:flex;flex-direction:column;}
 .hero-bg{
   position:absolute;inset:0;z-index:0;
   background:
@@ -136,57 +138,192 @@ nav::before{
 }
 .hero-scanlines{
   position:absolute;inset:0;z-index:1;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px);
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 2px,
+    rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px
+  );
 }
 .hero-content{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  min-height:100vh;
-  padding:0 clamp(2rem,6vw,6rem) clamp(3rem,8vh,6rem);
+  position:relative;z-index:2;display:flex;flex-direction:column;
+  justify-content:flex-end;min-height:90vh;
+  padding:0 clamp(2rem,6vw,6rem) clamp(2rem,5vh,4rem);
 }
-.hero-eyebrow{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.4rem;}
+.hero-eyebrow{
+  font-size:9px;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:1.4rem;
+}
 .hero-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(4rem,12vw,10rem);font-weight:300;line-height:.9;letter-spacing:-.02em;color:#fff;
+  font-size:clamp(4rem,12vw,10rem);font-weight:300;
+  line-height:.9;letter-spacing:-.02em;color:#fff;
 }
 .hero-name em{font-style:italic;color:rgba(255,255,255,.45);}
-.hero-tagline{margin-top:2rem;font-size:clamp(10px,1.2vw,13px);color:rgba(255,255,255,.3);max-width:500px;letter-spacing:.06em;line-height:1.9;}
-.hero-divider{width:80px;height:1px;background:rgba(255,255,255,.18);margin:2rem 0;}
+
+/* ── TAGLINE (requirement #1) ── */
+.hero-tagline-main{
+  margin-top:2rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.1rem,2.4vw,1.7rem);
+  font-weight:300;font-style:italic;
+  color:rgba(255,255,255,.6);
+  max-width:680px;line-height:1.55;letter-spacing:.01em;
+}
+
+.hero-divider{width:80px;height:1px;background:rgba(255,255,255,.18);margin:2.2rem 0;}
+
+/* ── SECTION GRID ── */
 .hero-nav-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  border:1px solid rgba(255,255,255,.07);max-width:920px;margin-top:4rem;
+  border:1px solid rgba(255,255,255,.07);max-width:960px;margin-top:3rem;
 }
 .hero-nav-item{
-  padding:1.4rem 1.8rem;
-  border-right:1px solid rgba(255,255,255,.07);
+  padding:1.4rem 1.8rem;border-right:1px solid rgba(255,255,255,.07);
   cursor:pointer;transition:background .3s;position:relative;overflow:hidden;
 }
 .hero-nav-item:last-child{border-right:none;}
 .hero-nav-item::before{
-  content:'';position:absolute;inset:0;
-  background:rgba(255,255,255,.04);
+  content:'';position:absolute;inset:0;background:rgba(255,255,255,.04);
   transform:translateY(100%);transition:transform .3s ease;
 }
 .hero-nav-item:hover::before{transform:translateY(0);}
 .hero-nav-num{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.22);margin-bottom:.5rem;}
-.hero-nav-label{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:rgba(255,255,255,.65);line-height:1.2;}
-.hero-nav-label em{font-style:italic;}
-.hero-bottom{
-  position:relative;z-index:2;padding:1.8rem clamp(2rem,6vw,6rem);
-  display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid rgba(255,255,255,.07);
+.hero-nav-label{
+  font-family:'Cormorant Garamond',serif;font-size:1.05rem;
+  font-weight:300;color:rgba(255,255,255,.65);line-height:1.2;
 }
-.hero-bottom-info{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.22);}
-.scroll-hint{position:absolute;right:3rem;bottom:3rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:10;}
+.hero-nav-label em{font-style:italic;}
+
+/* ══════════════════════════════
+   HOME CONTACT STRIP (requirement #4)
+   — System font (SF Pro on iPhone)
+   — Much larger, clearly visible
+══════════════════════════════ */
+.hero-contact-strip{
+  position:relative;z-index:2;
+  padding:3rem clamp(2rem,6vw,6rem);
+  border-top:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:flex-start;justify-content:space-between;
+  flex-wrap:wrap;gap:2rem;
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.home-contact-label{
+  font-family:var(--font-sys);
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);padding-top:.6rem;
+  flex-shrink:0;
+}
+.home-contact-items{
+  display:flex;align-items:flex-start;
+  gap:clamp(2rem,6vw,6rem);flex-wrap:wrap;flex:1;
+}
+.home-contact-item{
+  display:flex;flex-direction:column;gap:.4rem;
+  cursor:pointer;transition:opacity .2s;
+}
+.home-contact-item:hover{opacity:.65;}
+.hci-platform{
+  font-family:var(--font-sys);
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.32);
+}
+/* ── VALUE (the big clickable info) ── */
+.hci-value{
+  font-family:var(--font-sys);
+  font-size:clamp(1.15rem,2.2vw,1.6rem);
+  font-weight:300;letter-spacing:-.01em;color:#fff;
+  line-height:1.2;
+}
+.hci-value em{
+  font-style:italic;
+  color:rgba(255,255,255,.72);
+}
+
+/* ── Decorative underline on hover ── */
+.home-contact-item .hci-value{
+  position:relative;display:inline-block;
+}
+.home-contact-item .hci-value::after{
+  content:'';position:absolute;left:0;bottom:-4px;
+  width:100%;height:1px;background:rgba(255,255,255,.25);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.home-contact-item:hover .hci-value::after{transform:scaleX(1);}
+
+.hero-bottom{
+  position:relative;z-index:2;padding:1.4rem clamp(2rem,6vw,6rem);
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.hero-bottom-info{
+  font-family:var(--font-sys);
+  font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.22);
+}
+
+/* ── SCROLL HINT ── */
+.scroll-hint{
+  position:absolute;right:3rem;bottom:10rem;
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;z-index:10;
+}
 .scroll-hint-line{width:1px;height:50px;background:rgba(255,255,255,.15);position:relative;overflow:hidden;}
 .scroll-hint-line::after{
   content:'';position:absolute;top:0;left:0;right:0;height:50%;background:#fff;
   animation:scrollLine 2s ease-in-out infinite;
 }
 @keyframes scrollLine{0%{transform:translateY(-100%);}100%{transform:translateY(200%);}}
-.scroll-hint-text{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);writing-mode:vertical-rl;}
+.scroll-hint-text{
+  font-size:8px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.22);writing-mode:vertical-rl;
+}
 
-/* ── SECTION INNER ── */
+/* ══════════════════════════════
+   ABOUT PAGE (requirement #2)
+══════════════════════════════ */
+#page-about{background:#050505;}
+.about-inner{
+  position:relative;z-index:2;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(6rem,12vh,9rem) clamp(2rem,6vw,6rem) clamp(3rem,6vh,5rem);
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.3fr;
+  gap:clamp(3rem,8vw,8rem);align-items:start;margin-top:2rem;
+}
+.about-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  font-weight:300;line-height:1.0;letter-spacing:-.02em;
+  position:sticky;top:8rem;
+}
+.about-heading em{font-style:italic;color:rgba(255,255,255,.35);}
+.about-right{}
+.about-intro{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.25rem,2.4vw,1.75rem);
+  font-weight:300;line-height:1.55;
+  color:rgba(255,255,255,.88);
+  margin-bottom:2.2rem;
+}
+.about-intro strong{color:#fff;font-weight:400;}
+.about-divider{width:40px;height:1px;background:rgba(255,255,255,.15);margin:1.5rem 0;}
+.about-body{
+  font-size:13.5px;color:rgba(255,255,255,.42);
+  line-height:2;letter-spacing:.03em;
+  display:flex;flex-direction:column;gap:1.6rem;
+}
+.about-body p{color:rgba(255,255,255,.42);}
+.about-skills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.2rem;}
+.about-skill{
+  padding:.38rem 1rem;border:1px solid rgba(255,255,255,.1);
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);transition:border-color .2s,color .2s;cursor:default;
+}
+.about-skill:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.7);}
+
+/* ══════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════ */
 .sec-inner{
   position:relative;z-index:2;min-height:100vh;
   display:flex;flex-direction:column;
@@ -200,7 +337,8 @@ nav::before{
 .sec-label::before{content:'';display:inline-block;width:30px;height:1px;background:currentColor;}
 .sec-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:1;letter-spacing:-.02em;
+  font-size:clamp(3rem,7vw,6rem);font-weight:300;
+  line-height:1;letter-spacing:-.02em;
 }
 .sec-title em{font-style:italic;}
 .sec-header{margin-bottom:3rem;}
@@ -227,10 +365,13 @@ nav::before{
 .card-cat{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem;}
 .card-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;}
 .card-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
-.card-placeholder-icon{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(255,255,255,.07);font-style:italic;}
+.card-placeholder-icon{
+  font-family:'Cormorant Garamond',serif;font-size:3rem;
+  font-weight:300;color:rgba(255,255,255,.07);font-style:italic;
+}
 .card.wide{grid-column:span 2;aspect-ratio:16/9;}
 
-/* ── SECTION NAV BAR ── */
+/* ── SECTION BOTTOM NAV ── */
 .sec-page-nav{
   display:flex;justify-content:space-between;align-items:center;
   padding:2rem clamp(2rem,6vw,6rem);
@@ -238,15 +379,35 @@ nav::before{
   position:relative;z-index:2;
 }
 .sec-page-links{display:flex;gap:1.5rem;}
-.sec-page-link{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:color .2s;}
+.sec-page-link{
+  font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);cursor:pointer;transition:color .2s;
+}
 .sec-page-link:hover{color:#fff;}
 .sec-count{font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.2);}
 
-/* ── CONTACT ── */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,8vw,8rem);align-items:center;margin-top:3rem;}
-.contact-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:.95;letter-spacing:-.02em;}
+/* ══════════════════════════════
+   CONTACT PAGE
+══════════════════════════════ */
+#page-contact{background:#000;}
+#page-contact::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(255,255,255,.03) 0%,transparent 60%);
+}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(3rem,8vw,8rem);align-items:center;margin-top:3rem;
+}
+.contact-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8vw,7rem);font-weight:300;
+  line-height:.95;letter-spacing:-.02em;
+}
 .contact-heading em{font-style:italic;color:rgba(255,255,255,.38);}
-.contact-sub{margin-top:2rem;font-size:12px;color:rgba(255,255,255,.3);line-height:1.9;max-width:360px;}
+.contact-sub{
+  margin-top:2rem;font-size:12px;
+  color:rgba(255,255,255,.3);line-height:1.9;max-width:360px;
+}
 .contact-items{display:flex;flex-direction:column;gap:0;}
 .contact-item{
   padding:1.8rem 0;border-bottom:1px solid rgba(255,255,255,.07);
@@ -256,11 +417,20 @@ nav::before{
 .contact-item:hover{padding-left:.8rem;}
 .contact-item:first-child{border-top:1px solid rgba(255,255,255,.07);}
 .ci-num{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.2);padding-top:.2rem;}
-.ci-platform{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.3rem;}
-.ci-value{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;letter-spacing:.02em;}
-.ci-value em{font-style:italic;}
+.ci-platform{
+  font-family:var(--font-sys);
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-bottom:.3rem;
+}
+.ci-value{
+  font-family:var(--font-sys);
+  font-size:1.4rem;font-weight:300;letter-spacing:.01em;
+}
+.ci-value em{font-style:italic;color:rgba(255,255,255,.6);}
 
-/* ── PAGE BACKGROUNDS ── */
+/* ══════════════════════════════
+   SECTION PAGE BACKGROUNDS
+══════════════════════════════ */
 #page-reels{background:linear-gradient(135deg,#050e1a 0%,#0a1f3d 30%,#0d2952 50%,#f0f4ff 100%);}
 #page-reels::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,10,.6) 100%);}
 
@@ -297,18 +467,29 @@ nav::before{
     radial-gradient(ellipse 40% 40% at 20% 80%,rgba(0,80,255,.2) 0%,transparent 40%);
 }
 
-#page-contact{background:#000;}
-#page-contact::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(255,255,255,.03) 0%,transparent 60%);}
-
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
 @media(max-width:768px){
   nav{padding:1.2rem 1.5rem;}
   .nav-links{display:none;}
   .hero-nav-grid{grid-template-columns:repeat(2,1fr);}
   .sec-inner{padding:5rem 1.5rem 3rem;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-heading{position:static;}
   .contact-grid{grid-template-columns:1fr;}
   .card.wide{grid-column:span 1;aspect-ratio:16/9;}
   .back-btn{left:1.5rem;}
+  .hero-contact-strip{flex-direction:column;align-items:flex-start;gap:1.5rem;}
+  .home-contact-items{gap:2rem;}
+  .hci-value{font-size:1.1rem;}
+  .scroll-hint{display:none;}
+}
+@media(max-width:480px){
+  .hero-name{font-size:clamp(3.2rem,18vw,5.5rem);}
+  .hero-tagline-main{font-size:1rem;}
+  .home-contact-items{flex-direction:column;gap:1.5rem;}
+  .hci-value{font-size:1.05rem;}
 }
 </style>
 </head>
@@ -318,12 +499,15 @@ nav::before{
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="page-curtain" id="curtain"></div>
-<div class="back-btn" id="backBtn" onclick="goHome()">← Back</div>
+<div class="back-btn" id="backBtn" onclick="goBack()">← Back</div>
 
-<!-- NAV -->
+<!-- ══════════════════════════════
+     NAVIGATION
+══════════════════════════════ -->
 <nav>
-  <div class="nav-logo" onclick="goHome()">P<span>reet</span></div>
+  <div class="nav-logo" onclick="navigateTo('home')">P<span>reet</span></div>
   <ul class="nav-links">
+    <li><a href="#" onclick="navigateTo('about');return false;">About</a></li>
     <li><a href="#" onclick="navigateTo('reels');return false;">Reels</a></li>
     <li><a href="#" onclick="navigateTo('cinematic');return false;">Cinematic</a></li>
     <li><a href="#" onclick="navigateTo('documentary');return false;">Documentary</a></li>
@@ -336,37 +520,148 @@ nav::before{
   </ul>
 </nav>
 
-<!-- HOME -->
+<!-- ══════════════════════════════
+     HOME PAGE
+══════════════════════════════ -->
 <section class="page active" id="page-home">
   <div class="hero-bg"></div>
   <div class="hero-scanlines"></div>
+
   <div class="hero-content">
     <p class="hero-eyebrow reveal">Visual Creator · Editor · Motion Designer · Ludhiana, Punjab</p>
     <h1 class="hero-name reveal">Preet<br><em>Sidhu</em></h1>
+
+    <!-- REQUIREMENT #1 — tagline after name -->
+    <p class="hero-tagline-main reveal">
+      From concept to final cut — creating visuals that move people,<br>
+      tell stories, and make every second count.
+    </p>
+
     <div class="hero-divider reveal"></div>
-    <p class="hero-tagline reveal">Crafting cinematic visuals frame by frame —<br>from reels that stop thumbs to films that hold you in your seat.</p>
+
     <div class="hero-nav-grid reveal">
-      <div class="hero-nav-item" onclick="navigateTo('reels')"><div class="hero-nav-num">01</div><div class="hero-nav-label">Reels <em>Edits</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('cinematic')"><div class="hero-nav-num">02</div><div class="hero-nav-label">Cinematic <em>Videos</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('documentary')"><div class="hero-nav-num">03</div><div class="hero-nav-label">Documentary <em>Edits</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('brand')"><div class="hero-nav-num">04</div><div class="hero-nav-label">Brand <em>Videos</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('colorgrading')"><div class="hero-nav-num">05</div><div class="hero-nav-label">Color <em>Grading</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('music')"><div class="hero-nav-num">06</div><div class="hero-nav-label">Music <em>Videos</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('songposter')"><div class="hero-nav-num">07</div><div class="hero-nav-label">Song <em>Poster</em></div></div>
-      <div class="hero-nav-item" onclick="navigateTo('3d')"><div class="hero-nav-num">08</div><div class="hero-nav-label">3D <em>Visualiser</em></div></div>
+      <div class="hero-nav-item" onclick="navigateTo('reels')">
+        <div class="hero-nav-num">01</div>
+        <div class="hero-nav-label">Reels <em>Edits</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('cinematic')">
+        <div class="hero-nav-num">02</div>
+        <div class="hero-nav-label">Cinematic <em>Videos</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('documentary')">
+        <div class="hero-nav-num">03</div>
+        <div class="hero-nav-label">Documentary <em>Edits</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('brand')">
+        <div class="hero-nav-num">04</div>
+        <div class="hero-nav-label">Brand <em>Videos</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('colorgrading')">
+        <div class="hero-nav-num">05</div>
+        <div class="hero-nav-label">Color <em>Grading</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('music')">
+        <div class="hero-nav-num">06</div>
+        <div class="hero-nav-label">Music <em>Videos</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('songposter')">
+        <div class="hero-nav-num">07</div>
+        <div class="hero-nav-label">Song <em>Poster</em></div>
+      </div>
+      <div class="hero-nav-item" onclick="navigateTo('3d')">
+        <div class="hero-nav-num">08</div>
+        <div class="hero-nav-label">3D <em>Visualiser</em></div>
+      </div>
     </div>
   </div>
-  <div class="hero-bottom reveal">
-    <span class="hero-bottom-info">© 2026 Preet Sidhu</span>
-    <span class="hero-bottom-info" onclick="navigateTo('contact')" style="cursor:pointer;">Get in Touch →</span>
+
+  <!-- REQUIREMENT #4 — Larger, system-font, clearly visible contact strip -->
+  <div class="hero-contact-strip reveal">
+    <span class="home-contact-label">Get in touch</span>
+    <div class="home-contact-items">
+
+      <div class="home-contact-item" onclick="window.open('https://instagram.com/Preet_Sidhu_364','_blank')">
+        <span class="hci-platform">Instagram</span>
+        <span class="hci-value"><em>@Preet_Sidhu_364</em></span>
+      </div>
+
+      <div class="home-contact-item" onclick="window.location='mailto:preett978@gmail.com'">
+        <span class="hci-platform">Gmail</span>
+        <span class="hci-value">preett978@gmail.com</span>
+      </div>
+
+      <div class="home-contact-item" onclick="window.location='tel:+918360747667'">
+        <span class="hci-platform">Phone</span>
+        <span class="hci-value">+91&nbsp;83607&nbsp;47667</span>
+      </div>
+
+    </div>
   </div>
+
+  <div class="hero-bottom">
+    <span class="hero-bottom-info">© 2026 Preet Sidhu</span>
+    <span class="hero-bottom-info" onclick="navigateTo('about')" style="cursor:pointer;">About Me →</span>
+  </div>
+
   <div class="scroll-hint">
     <div class="scroll-hint-line"></div>
     <span class="scroll-hint-text">scroll</span>
   </div>
 </section>
 
-<!-- 01 REELS -->
+<!-- ══════════════════════════════
+     ABOUT PAGE (requirement #2)
+══════════════════════════════ -->
+<section class="page" id="page-about">
+  <div class="about-inner">
+    <div class="sec-label reveal">About Me</div>
+    <div class="about-grid">
+
+      <div>
+        <h2 class="about-heading reveal">
+          Crafting stories<br><em>frame by</em><br>frame
+        </h2>
+      </div>
+
+      <div class="about-right">
+        <p class="about-intro reveal">
+          I'm <strong>Preet Sidhu</strong> — a visual creator obsessed with the space between a raw idea and a finished cinematic moment.
+        </p>
+        <div class="about-divider reveal"></div>
+        <div class="about-body reveal">
+          <p>From motion graphics that stop thumbs mid-scroll to long-form cinematic edits that hold you in your seat — I work across formats, moods, and platforms to make visuals that don't just look good, but feel right.</p>
+          <p>My process starts with understanding the story, then shaping it with light, rhythm, and motion until it truly stands out.</p>
+        </div>
+        <div class="about-skills reveal">
+          <span class="about-skill">Reels Editing</span>
+          <span class="about-skill">Cinematic Film</span>
+          <span class="about-skill">Motion Graphics</span>
+          <span class="about-skill">Color Grading</span>
+          <span class="about-skill">Documentary</span>
+          <span class="about-skill">Brand Films</span>
+          <span class="about-skill">Music Videos</span>
+          <span class="about-skill">3D Visualiser</span>
+          <span class="about-skill">Song Posters</span>
+          <span class="about-skill">Premiere Pro</span>
+          <span class="about-skill">After Effects</span>
+          <span class="about-skill">DaVinci Resolve</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="sec-page-nav">
+    <div class="sec-page-links">
+      <span class="sec-page-link" onclick="navigateTo('home')">← Home</span>
+      <span class="sec-page-link" onclick="navigateTo('reels')">Work →</span>
+    </div>
+    <span class="sec-count">About</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     01 — REELS
+══════════════════════════════ -->
 <section class="page" id="page-reels">
   <div class="sec-inner">
     <div class="sec-header">
@@ -410,7 +705,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 02 CINEMATIC -->
+<!-- ══════════════════════════════
+     02 — CINEMATIC
+══════════════════════════════ -->
 <section class="page" id="page-cinematic">
   <div class="sec-inner">
     <div class="sec-header">
@@ -454,7 +751,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 03 DOCUMENTARY -->
+<!-- ══════════════════════════════
+     03 — DOCUMENTARY
+══════════════════════════════ -->
 <section class="page" id="page-documentary">
   <div class="sec-inner">
     <div class="sec-header">
@@ -498,7 +797,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 04 BRAND -->
+<!-- ══════════════════════════════
+     04 — BRAND
+══════════════════════════════ -->
 <section class="page" id="page-brand">
   <div class="sec-inner">
     <div class="sec-header">
@@ -542,7 +843,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 05 COLOR GRADING -->
+<!-- ══════════════════════════════
+     05 — COLOR GRADING
+══════════════════════════════ -->
 <section class="page" id="page-colorgrading">
   <div class="sec-inner">
     <div class="sec-header">
@@ -586,7 +889,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 06 MUSIC VIDEOS -->
+<!-- ══════════════════════════════
+     06 — MUSIC VIDEOS
+══════════════════════════════ -->
 <section class="page" id="page-music">
   <div class="sec-inner">
     <div class="sec-header">
@@ -630,7 +935,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 07 SONG POSTER -->
+<!-- ══════════════════════════════
+     07 — SONG POSTER
+══════════════════════════════ -->
 <section class="page" id="page-songposter">
   <div class="sec-inner">
     <div class="sec-header">
@@ -679,7 +986,9 @@ nav::before{
   </div>
 </section>
 
-<!-- 08 3D VISUALISER -->
+<!-- ══════════════════════════════
+     08 — 3D VISUALISER
+══════════════════════════════ -->
 <section class="page" id="page-3d">
   <div class="sec-inner">
     <div class="sec-header">
@@ -723,7 +1032,9 @@ nav::before{
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ══════════════════════════════
+     CONTACT PAGE
+══════════════════════════════ -->
 <section class="page" id="page-contact">
   <div class="sec-inner">
     <div class="sec-label reveal">Contact</div>
@@ -744,7 +1055,7 @@ nav::before{
           </div>
           <div class="contact-item" onclick="window.location='tel:+918360747667'">
             <span class="ci-num">03</span>
-            <div><p class="ci-platform">Phone</p><p class="ci-value">+91 8360747667</p></div>
+            <div><p class="ci-platform">Phone</p><p class="ci-value">+91&nbsp;83607&nbsp;47667</p></div>
           </div>
         </div>
       </div>
@@ -758,59 +1069,138 @@ nav::before{
   </div>
 </section>
 
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
 <script>
-// CURSOR
+/* ──────────────────────────────
+   CUSTOM CURSOR
+────────────────────────────── */
 const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+const ring   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
 });
-(function animateRing(){
-  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+
+(function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
   requestAnimationFrame(animateRing);
 })();
-document.querySelectorAll('a,button,[onclick],.card,.hero-nav-item,.contact-item,.sec-page-link,.back-btn').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
-  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+
+const hoverTargets = 'a,button,[onclick],.card,.hero-nav-item,.contact-item,.home-contact-item,.sec-page-link,.back-btn';
+document.querySelectorAll(hoverTargets).forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width  = '20px'; cursor.style.height = '20px';
+    ring.style.width    = '60px'; ring.style.height   = '60px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width  = '12px'; cursor.style.height = '12px';
+    ring.style.width    = '36px'; ring.style.height   = '36px';
+  });
 });
 
-// PAGE NAV
-const curtain = document.getElementById('curtain');
-let current = 'home';
-function navigateTo(id){
-  if(id===current) return;
-  curtain.className='page-curtain in';
-  setTimeout(()=>{
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    const next = document.getElementById('page-'+id);
-    if(next) next.classList.add('active');
-    current = id;
-    const bb = document.getElementById('backBtn');
-    id==='home' ? bb.classList.remove('visible') : bb.classList.add('visible');
-    window.scrollTo(0,0);
-    triggerReveals();
-    curtain.className='page-curtain out';
-    setTimeout(()=>{ curtain.className='page-curtain'; },520);
-  },480);
-}
-function goHome(){ navigateTo('home'); }
+/* ──────────────────────────────
+   PAGE NAVIGATION + HISTORY
+   (requirement #3 — mouse btn 4
+   + mobile swipe-right to go back)
+────────────────────────────── */
+const curtain      = document.getElementById('curtain');
+const backBtn      = document.getElementById('backBtn');
+let historyStack   = ['home'];
+let currentPage    = 'home';
+let isAnimating    = false;
 
-// REVEAL
-function triggerReveals(){
-  setTimeout(()=>{
-    document.querySelectorAll('.page.active .reveal').forEach((el,i)=>{
-      setTimeout(()=>el.classList.add('visible'), i*80);
-    });
-  },100);
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.reveal.visible').forEach(el => el.classList.remove('visible'));
+  const next = document.getElementById('page-' + id);
+  if (next) next.classList.add('active');
+  currentPage = id;
+  backBtn.classList.toggle('visible', historyStack.length > 1);
+  window.scrollTo(0, 0);
+  triggerReveals();
 }
+
+function navigateTo(id) {
+  if (id === currentPage || isAnimating) return;
+  isAnimating = true;
+  curtain.className = 'page-curtain in';
+  setTimeout(() => {
+    historyStack.push(id);
+    showPage(id);
+    curtain.className = 'page-curtain out';
+    setTimeout(() => { curtain.className = 'page-curtain'; isAnimating = false; }, 520);
+  }, 480);
+}
+
+function goBack() {
+  if (historyStack.length <= 1 || isAnimating) return;
+  isAnimating = true;
+  historyStack.pop();
+  const prev = historyStack[historyStack.length - 1];
+  curtain.className = 'page-curtain in';
+  setTimeout(() => {
+    showPage(prev);
+    curtain.className = 'page-curtain out';
+    setTimeout(() => { curtain.className = 'page-curtain'; isAnimating = false; }, 520);
+  }, 480);
+}
+
+/* ── Mouse side-button (Button 4 = browser back on gaming/standard mice) ── */
+window.addEventListener('mouseup', e => {
+  if (e.button === 3) goBack(); // button 4
+  if (e.button === 4) navigateTo(historyStack[Math.min(historyStack.length, historyStack.length)]); // button 5 (forward) — optional, just ignore
+});
+
+/* ── Intercept browser back button (popstate) ── */
+history.pushState(null, '', window.location.href);
+window.addEventListener('popstate', () => {
+  history.pushState(null, '', window.location.href); // re-push so we stay
+  goBack();
+});
+
+/* ── Mobile swipe-right gesture (requirement #3) ── */
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+  // Only trigger if horizontal swipe > 72px and not mostly vertical
+  if (dx > 72 && dy < 60) goBack();
+}, { passive: true });
+
+/* ──────────────────────────────
+   SCROLL REVEAL
+────────────────────────────── */
+function triggerReveals() {
+  setTimeout(() => {
+    document.querySelectorAll('.page.active .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+  }, 120);
+}
+
+// IntersectionObserver for scroll-into-view reveals
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Trigger for initial page
 triggerReveals();
-const ro = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
 </body>
 </html>
