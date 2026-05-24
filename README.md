@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -9,12 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{
-  background:#000;color:#fff;
-  font-family:'DM Mono',monospace;
-  font-size:14px;line-height:1.7;
-  overflow-x:hidden;cursor:none;
-}
+body{background:#000;color:#fff;font-family:'DM Mono',monospace;font-size:14px;line-height:1.7;overflow-x:hidden;cursor:none;}
 img,video{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 :root{--font-sys:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;}
@@ -35,6 +29,7 @@ a{color:inherit;text-decoration:none;}
   90%{background-position:-10% 10%;}100%{background-position:0 0;}
 }
 
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.4rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
 nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.85),transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:-1;}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:.08em;color:#fff;cursor:pointer;}
@@ -52,6 +47,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .nav-mobile a:hover{color:#fff;}
 .nav-mobile-close{position:absolute;top:2rem;right:2.5rem;font-size:1.5rem;color:rgba(255,255,255,.4);cursor:pointer;}
 
+/* PAGE */
 .page{display:none;min-height:100vh;position:relative;overflow:hidden;}
 .page.active{display:block;}
 #page-home.active{display:flex;flex-direction:column;}
@@ -87,6 +83,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .hero-nav-num{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.32);margin-bottom:.5rem;}
 .hero-nav-label{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.8);line-height:1.2;}
 .hero-nav-label em{font-style:italic;color:rgba(255,255,255,.5);}
+
 .hero-contact-strip{position:relative;z-index:2;padding:3rem clamp(2rem,6vw,6rem);border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);}
 .home-contact-label{font-family:var(--font-sys);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);padding-top:.6rem;flex-shrink:0;}
 .home-contact-items{display:flex;align-items:flex-start;gap:clamp(2rem,6vw,6rem);flex-wrap:wrap;flex:1;}
@@ -105,7 +102,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 @keyframes scrollLine{0%{transform:translateY(-100%);}100%{transform:translateY(200%);}}
 .scroll-hint-text{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);writing-mode:vertical-rl;}
 
-/* SECTION SHARED */
+/* SECTIONS */
 .sec-inner{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;padding:clamp(5rem,10vh,8rem) clamp(1.5rem,4vw,4rem) clamp(2rem,4vh,4rem);}
 .sec-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;}
 .sec-label::before{content:'';display:inline-block;width:28px;height:1px;background:currentColor;}
@@ -113,41 +110,90 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .sec-title em{font-style:italic;}
 .sec-header{margin-bottom:2.5rem;}
 
-/* CARD LAYOUT — Kriti style */
+/* ══════════════════════════════
+   CARD SYSTEM
+══════════════════════════════ */
 .card-list{display:flex;flex-direction:column;gap:2rem;flex:1;}
+
+/* Two-col grid for 9:16 reels */
+.card-list.two-col-tall{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1.5rem;
+}
+.card-list.two-col-tall .card-item{margin-bottom:0;}
+
+/* Two-col grid for 16:9 wide videos */
+.card-list.two-col-wide{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
+  gap:1.5rem;
+}
+.card-list.two-col-wide .card-item{margin-bottom:0;}
+
+/* Four-col grid for posters */
+.card-list.four-col{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.5rem;
+}
+.card-list.four-col .card-item{margin-bottom:0;}
+
+/* Color grading — 3-col square */
+.card-list.three-col-square{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.5rem;
+}
+.card-list.three-col-square .card-item{margin-bottom:0;}
+
 .card-item{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.07);cursor:pointer;transition:border-color .3s;}
 .card-item:hover{border-color:rgba(255,255,255,.22);}
+
 .card-media{position:relative;overflow:hidden;background:#050505;width:100%;}
-.card-media video,.card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
-.card-item:hover .card-media video,
-.card-item:hover .card-media img{transform:scale(1.03);}
+.card-media img,.card-media video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
+.card-item:hover .card-media img,
+.card-item:hover .card-media video{transform:scale(1.03);}
+
+/* Gradient placeholder */
 .card-media-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;}
-.play-btn{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);transition:background .3s,transform .3s;flex-shrink:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+
+.play-btn{
+  width:58px;height:58px;border-radius:50%;
+  background:rgba(255,255,255,.15);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.25);
+  transition:background .3s,transform .3s;
+  flex-shrink:0;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+}
 .card-item:hover .play-btn{background:rgba(255,255,255,.28);transform:translate(-50%,-50%) scale(1.08);}
 .play-btn svg{width:18px;height:18px;fill:#fff;margin-left:3px;}
 
-/* For poster images — no play button overlay needed */
+/* Poster cards — no play btn */
 .card-media.is-poster .play-btn{display:none;}
-.card-media.is-poster img{width:100%;height:100%;object-fit:cover;}
 
 .card-meta{padding:1rem 1.2rem 1.2rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.3);}
 .card-tag{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.18);padding:.2rem .6rem;margin-bottom:.55rem;}
 .card-title-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:rgba(255,255,255,.8);letter-spacing:.02em;}
 
-/* ASPECT RATIOS */
-.ratio-16-9 .card-media{aspect-ratio:16/9;}
-.ratio-9-16 .card-media{aspect-ratio:9/16;}
-.ratio-grade .card-media{aspect-ratio:16/9;}
+/* ══════════════════════════════
+   ASPECT RATIOS
+   Reels        = 9:16  (tall portrait)
+   Cinematic    = 16:9  (landscape)
+   Documentary  = 16:9
+   Brand        = 16:9
+   Music        = 16:9
+   3D           = 16:9
+   Color Grade  = 1:1   (square — matches image style)
+   Song Poster  = 3:4   (portrait — matches Badla/Entry etc)
+══════════════════════════════ */
+.ratio-9-16  .card-media{aspect-ratio:9/16;}
+.ratio-16-9  .card-media{aspect-ratio:16/9;}
+.ratio-square .card-media{aspect-ratio:1/1;}
 .ratio-poster .card-media{aspect-ratio:3/4;}
 
-/* Two column grid for 9:16 sections */
-.card-list.two-col{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
-.card-list.two-col .card-item{margin-bottom:0;}
-
-/* Four column grid for song posters */
-.card-list.four-col{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;}
-.card-list.four-col .card-item{margin-bottom:0;}
-
+/* Section nav */
 .sec-page-nav{display:flex;justify-content:space-between;align-items:center;padding:2rem clamp(1.5rem,4vw,4rem);border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:2;}
 .sec-page-links{display:flex;gap:1.5rem;}
 .sec-page-link{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.38);cursor:pointer;transition:color .2s;}
@@ -188,21 +234,23 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 #page-3d{background:linear-gradient(140deg,#04001a 0%,#0d0030 25%,#1a0066 50%,#2200aa 70%,#4400ff 85%,#6633ff 100%);}
 #page-3d::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(100,0,255,.3) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(0,80,255,.2) 0%,transparent 40%);}
 
-@media(max-width:768px){
+@media(max-width:900px){
   nav{padding:1.2rem 1.5rem;}
   .nav-links{display:none;}
   .nav-burger{display:flex;}
   .hero-nav-grid{grid-template-columns:repeat(2,1fr);}
   .sec-inner{padding:5rem 1.2rem 2.5rem;}
   .contact-grid{grid-template-columns:1fr;}
-  .card-list.two-col,.card-list.four-col{grid-template-columns:repeat(2,1fr);}
+  .card-list.two-col-wide{grid-template-columns:1fr;}
+  .card-list.two-col-tall{grid-template-columns:repeat(2,1fr);}
+  .card-list.four-col{grid-template-columns:repeat(2,1fr);}
+  .card-list.three-col-square{grid-template-columns:repeat(2,1fr);}
   .hero-contact-strip{flex-direction:column;align-items:flex-start;gap:1.5rem;}
-  .home-contact-items{gap:2rem;}
   .scroll-hint{display:none;}
 }
 @media(max-width:480px){
   .hero-name{font-size:clamp(3.2rem,16vw,5rem);}
-  .card-list.two-col,.card-list.four-col{grid-template-columns:repeat(2,1fr);}
+  .card-list.two-col-tall,.card-list.four-col,.card-list.three-col-square{grid-template-columns:repeat(2,1fr);}
   .hci-value{font-size:1rem;}
 }
 </style>
@@ -245,9 +293,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 
 <!-- HOME -->
 <section class="page active" id="page-home">
-  <div class="hero-bg"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-scanlines"></div>
+  <div class="hero-bg"></div><div class="hero-glow"></div><div class="hero-scanlines"></div>
   <div class="hero-content">
     <p class="hero-eyebrow reveal">Visual Creator · Editor · Motion Designer · Chandigarh</p>
     <h1 class="hero-name reveal">Preet<br><em>Sidhu</em></h1>
@@ -289,21 +335,18 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   <div class="scroll-hint"><div class="scroll-hint-line"></div><span class="scroll-hint-text">scroll</span></div>
 </section>
 
-<!-- 01 REELS — 16:9 -->
-<!-- TO ADD VIDEO: replace the card-media-inner div with:
-     <video src="your-reel.mp4" muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video>
-     Keep the play-btn div inside or remove it if video autoplays -->
+<!-- 01 REELS — 9:16 TALL PORTRAIT -->
 <section class="page" id="page-reels">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">01 / 08 — Reels Edits</div>
       <h2 class="sec-title reveal">Reels <em>Edits</em></h2>
     </div>
-    <div class="card-list ratio-16-9">
+    <div class="card-list ratio-9-16 two-col-tall">
       <div class="card-item reveal">
         <div class="card-media">
-          <!-- REPLACE WITH: <video src="reel1.mp4" muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video> -->
-          <div class="card-media-inner" style="background:linear-gradient(135deg,#05183a,#0a3070,#1a4a9a);">
+          <!-- <video src="reel1.mp4" muted loop playsinline></video> -->
+          <div class="card-media-inner" style="background:linear-gradient(160deg,#05183a,#0a3070,#1a4a9a);">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
@@ -311,7 +354,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
       </div>
       <div class="card-item reveal">
         <div class="card-media">
-          <div class="card-media-inner" style="background:linear-gradient(135deg,#031428,#0a2550);">
+          <div class="card-media-inner" style="background:linear-gradient(160deg,#031428,#0a2550);">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
@@ -319,7 +362,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
       </div>
       <div class="card-item reveal">
         <div class="card-media">
-          <div class="card-media-inner" style="background:linear-gradient(135deg,#081c3c,#102c5a);">
+          <div class="card-media-inner" style="background:linear-gradient(160deg,#081c3c,#102c5a);">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
@@ -327,7 +370,23 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
       </div>
       <div class="card-item reveal">
         <div class="card-media">
-          <div class="card-media-inner" style="background:linear-gradient(135deg,#051020,#0d2244);">
+          <div class="card-media-inner" style="background:linear-gradient(160deg,#051020,#0d2244);">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <div class="card-meta"><span class="card-tag">Reel</span><p class="card-title-text">Reel Title</p></div>
+      </div>
+      <div class="card-item reveal">
+        <div class="card-media">
+          <div class="card-media-inner" style="background:linear-gradient(160deg,#061828,#0e2e50);">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <div class="card-meta"><span class="card-tag">Reel</span><p class="card-title-text">Reel Title</p></div>
+      </div>
+      <div class="card-item reveal">
+        <div class="card-media">
+          <div class="card-media-inner" style="background:linear-gradient(160deg,#040e20,#0a1e40);">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
@@ -341,17 +400,17 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 02 CINEMATIC — 9:16 -->
+<!-- 02 CINEMATIC — 16:9 LANDSCAPE -->
 <section class="page" id="page-cinematic">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">02 / 08 — Cinematic Videos</div>
       <h2 class="sec-title reveal">Cinematic <em>Videos</em></h2>
     </div>
-    <div class="card-list ratio-9-16 two-col">
+    <div class="card-list ratio-16-9 two-col-wide">
       <div class="card-item reveal">
         <div class="card-media">
-          <!-- REPLACE WITH: <video src="cinematic1.mp4" muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video> -->
+          <!-- <video src="cinematic1.mp4" muted loop playsinline></video> -->
           <div class="card-media-inner" style="background:linear-gradient(135deg,#000,#020c1e,#041428);">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
@@ -390,14 +449,14 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 03 DOCUMENTARY — 9:16 -->
+<!-- 03 DOCUMENTARY — 16:9 LANDSCAPE -->
 <section class="page" id="page-documentary">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">03 / 08 — Documentary Edits</div>
       <h2 class="sec-title reveal">Documentary <em>Edits</em></h2>
     </div>
-    <div class="card-list ratio-9-16 two-col">
+    <div class="card-list ratio-16-9 two-col-wide">
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:linear-gradient(135deg,#0a0500,#3d1400,#a03000);">
@@ -438,14 +497,14 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 04 BRAND — 9:16 -->
+<!-- 04 BRAND — 16:9 LANDSCAPE -->
 <section class="page" id="page-brand">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">04 / 08 — Brand Videos</div>
       <h2 class="sec-title reveal">Brand <em>Videos</em></h2>
     </div>
-    <div class="card-list ratio-9-16 two-col">
+    <div class="card-list ratio-16-9 two-col-wide">
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:linear-gradient(135deg,#080000,#300000,#880000);">
@@ -486,21 +545,21 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 05 COLOR GRADING — 16:9 -->
+<!-- 05 COLOR GRADING — 1:1 SQUARE -->
 <section class="page" id="page-colorgrading">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">05 / 08 — Color Grading</div>
       <h2 class="sec-title reveal">Color <em>Grading</em></h2>
     </div>
-    <div class="card-list ratio-grade">
+    <div class="card-list ratio-square three-col-square">
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:linear-gradient(135deg,#001a0d,#00338a,#440088,#880044);">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
-        <div class="card-meta"><span class="card-tag">Featured · Grade</span><p class="card-title-text">Drop your video title here</p></div>
+        <div class="card-meta"><span class="card-tag">Featured · Grade</span><p class="card-title-text">Drop your project here</p></div>
       </div>
       <div class="card-item reveal">
         <div class="card-media">
@@ -526,6 +585,22 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
         </div>
         <div class="card-meta"><span class="card-tag">Grade</span><p class="card-title-text">Grading Project</p></div>
       </div>
+      <div class="card-item reveal">
+        <div class="card-media">
+          <div class="card-media-inner" style="background:linear-gradient(135deg,#220044,#004466);">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <div class="card-meta"><span class="card-tag">Grade</span><p class="card-title-text">Grading Project</p></div>
+      </div>
+      <div class="card-item reveal">
+        <div class="card-media">
+          <div class="card-media-inner" style="background:linear-gradient(135deg,#440022,#002244);">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <div class="card-meta"><span class="card-tag">Grade</span><p class="card-title-text">Grading Project</p></div>
+      </div>
     </div>
   </div>
   <div class="sec-page-nav">
@@ -534,14 +609,14 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 06 MUSIC — 9:16 -->
+<!-- 06 MUSIC — 16:9 LANDSCAPE -->
 <section class="page" id="page-music">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">06 / 08 — Music Videos</div>
       <h2 class="sec-title reveal">Music <em>Videos</em></h2>
     </div>
-    <div class="card-list ratio-9-16 two-col">
+    <div class="card-list ratio-16-9 two-col-wide">
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:linear-gradient(135deg,#000,#222,#555);">
@@ -582,7 +657,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 07 SONG POSTER — YOUR 4 REAL IMAGES -->
+<!-- 07 SONG POSTER — 3:4 PORTRAIT with real images -->
 <section class="page" id="page-songposter">
   <div class="sec-inner">
     <div class="sec-header">
@@ -591,40 +666,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
     </div>
     <div class="card-list ratio-poster four-col">
 
-      <!-- BADLA — Image 1 -->
-      <div class="card-item reveal">
-        <div class="card-media is-poster">
-          <img src="/mnt/user-data/uploads/IMG_5779.jpeg" alt="Badla — Watan Sahi" loading="lazy"/>
-        </div>
-        <div class="card-meta">
-          <span class="card-tag">Poster · Artwork</span>
-          <p class="card-title-text">Badla — Watan Sahi</p>
-        </div>
-      </div>
-
-      <!-- JATT LAGDE — Image 2 -->
-      <div class="card-item reveal">
-        <div class="card-media is-poster">
-          <img src="/mnt/user-data/uploads/IMG_5781.jpeg" alt="Jatt Lagde — Noor Tung" loading="lazy"/>
-        </div>
-        <div class="card-meta">
-          <span class="card-tag">Poster · Artwork</span>
-          <p class="card-title-text">Jatt Lagde — Noor Tung</p>
-        </div>
-      </div>
-
-      <!-- WAARI JAAVAN — Image 3 -->
-      <div class="card-item reveal">
-        <div class="card-media is-poster">
-          <img src="/mnt/user-data/uploads/IMG_5782.jpeg" alt="Waari Jaavan — Satkar Sandhu" loading="lazy"/>
-        </div>
-        <div class="card-meta">
-          <span class="card-tag">Poster · Artwork</span>
-          <p class="card-title-text">Waari Jaavan — Satkar Sandhu</p>
-        </div>
-      </div>
-
-      <!-- ENTRY — Image 4 -->
+      <!-- Entry — Amrit Maan (IMG_5783) -->
       <div class="card-item reveal">
         <div class="card-media is-poster">
           <img src="/mnt/user-data/uploads/IMG_5783.jpeg" alt="Entry — Amrit Maan" loading="lazy"/>
@@ -635,12 +677,45 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
         </div>
       </div>
 
-      <!-- Slots for more posters -->
+      <!-- Jatt Lagde — Noor Tung (IMG_5781) -->
+      <div class="card-item reveal">
+        <div class="card-media is-poster">
+          <img src="/mnt/user-data/uploads/IMG_5781.jpeg" alt="Jatt Lagde — Noor Tung" loading="lazy"/>
+        </div>
+        <div class="card-meta">
+          <span class="card-tag">Poster · Artwork</span>
+          <p class="card-title-text">Jatt Lagde — Noor Tung</p>
+        </div>
+      </div>
+
+      <!-- Badla — Watan Sahi (IMG_5779) -->
+      <div class="card-item reveal">
+        <div class="card-media is-poster">
+          <img src="/mnt/user-data/uploads/IMG_5779.jpeg" alt="Badla — Watan Sahi" loading="lazy"/>
+        </div>
+        <div class="card-meta">
+          <span class="card-tag">Poster · Artwork</span>
+          <p class="card-title-text">Badla — Watan Sahi</p>
+        </div>
+      </div>
+
+      <!-- Waari Jaavan — Satkar Sandhu (IMG_5782) -->
+      <div class="card-item reveal">
+        <div class="card-media is-poster">
+          <img src="/mnt/user-data/uploads/IMG_5782.jpeg" alt="Waari Jaavan — Satkar Sandhu" loading="lazy"/>
+        </div>
+        <div class="card-meta">
+          <span class="card-tag">Poster · Artwork</span>
+          <p class="card-title-text">Waari Jaavan — Satkar Sandhu</p>
+        </div>
+      </div>
+
+      <!-- Placeholder slots -->
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:#060606;border:1px solid rgba(255,255,255,.06);">
-            <div class="play-btn" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+            <div class="play-btn" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);">
+              <svg viewBox="0 0 24 24" style="margin-left:0;"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#fff"/></svg>
             </div>
           </div>
         </div>
@@ -649,13 +724,34 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:#040404;border:1px solid rgba(255,255,255,.06);">
-            <div class="play-btn" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
+            <div class="play-btn" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);">
+              <svg viewBox="0 0 24 24" style="margin-left:0;"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#fff"/></svg>
             </div>
           </div>
         </div>
         <div class="card-meta"><span class="card-tag">Poster</span><p class="card-title-text">Coming Soon</p></div>
       </div>
+      <div class="card-item reveal">
+        <div class="card-media">
+          <div class="card-media-inner" style="background:#050505;border:1px solid rgba(255,255,255,.06);">
+            <div class="play-btn" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);">
+              <svg viewBox="0 0 24 24" style="margin-left:0;"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#fff"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-meta"><span class="card-tag">Poster</span><p class="card-title-text">Coming Soon</p></div>
+      </div>
+      <div class="card-item reveal">
+        <div class="card-media">
+          <div class="card-media-inner" style="background:#030303;border:1px solid rgba(255,255,255,.06);">
+            <div class="play-btn" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);">
+              <svg viewBox="0 0 24 24" style="margin-left:0;"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#fff"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-meta"><span class="card-tag">Poster</span><p class="card-title-text">Coming Soon</p></div>
+      </div>
+
     </div>
   </div>
   <div class="sec-page-nav">
@@ -664,14 +760,14 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
   </div>
 </section>
 
-<!-- 08 3D — 9:16 -->
+<!-- 08 3D — 16:9 LANDSCAPE -->
 <section class="page" id="page-3d">
   <div class="sec-inner">
     <div class="sec-header">
       <div class="sec-label reveal">08 / 08 — 3D Visualiser</div>
       <h2 class="sec-title reveal">3D <em>Visualiser</em></h2>
     </div>
-    <div class="card-list ratio-9-16 two-col">
+    <div class="card-list ratio-16-9 two-col-wide">
       <div class="card-item reveal">
         <div class="card-media">
           <div class="card-media-inner" style="background:linear-gradient(135deg,#04001a,#1a0066,#4400ff);">
@@ -769,32 +865,20 @@ function showPage(id){
   document.querySelectorAll('.reveal.visible').forEach(el=>el.classList.remove('visible'));
   const next=document.getElementById('page-'+id);
   if(next)next.classList.add('active');
-  currentPage=id;
-  window.scrollTo(0,0);
-  triggerReveals();
+  currentPage=id;window.scrollTo(0,0);triggerReveals();
 }
 function navigateTo(id){
   if(id===currentPage||isAnimating)return;
   isAnimating=true;
   curtain.className='page-curtain in';
-  setTimeout(()=>{
-    historyStack.push(id);
-    showPage(id);
-    curtain.className='page-curtain out';
-    setTimeout(()=>{curtain.className='page-curtain';isAnimating=false;},520);
-  },480);
+  setTimeout(()=>{historyStack.push(id);showPage(id);curtain.className='page-curtain out';setTimeout(()=>{curtain.className='page-curtain';isAnimating=false;},520);},480);
 }
 function goBack(){
   if(historyStack.length<=1||isAnimating)return;
-  isAnimating=true;
-  historyStack.pop();
+  isAnimating=true;historyStack.pop();
   const prev=historyStack[historyStack.length-1];
   curtain.className='page-curtain in';
-  setTimeout(()=>{
-    showPage(prev);
-    curtain.className='page-curtain out';
-    setTimeout(()=>{curtain.className='page-curtain';isAnimating=false;},520);
-  },480);
+  setTimeout(()=>{showPage(prev);curtain.className='page-curtain out';setTimeout(()=>{curtain.className='page-curtain';isAnimating=false;},520);},480);
 }
 
 window.addEventListener('mouseup',e=>{if(e.button===3)goBack();});
@@ -811,11 +895,7 @@ document.addEventListener('touchend',e=>{
 },{passive:true});
 
 function triggerReveals(){
-  setTimeout(()=>{
-    document.querySelectorAll('.page.active .reveal').forEach((el,i)=>{
-      setTimeout(()=>el.classList.add('visible'),i*80);
-    });
-  },120);
+  setTimeout(()=>{document.querySelectorAll('.page.active .reveal').forEach((el,i)=>{setTimeout(()=>el.classList.add('visible'),i*80);});},120);
 }
 const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
@@ -823,3 +903,4 @@ triggerReveals();
 </script>
 </body>
 </html>
+
