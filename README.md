@@ -1,24 +1,3 @@
-
-
-https://github.com/user-attachments/assets/898ce4d0-05e0-432b-8176-695f6058c524
-
-
-
-https://github.com/user-attachments/assets/d407bd26-b158-425f-8cd3-19733b7829a8
-
-
-
-https://github.com/user-attachments/assets/0c32b19c-8273-45f6-bd44-6d647413055f
-
-
-
-https://github.com/user-attachments/assets/b8360d55-640f-426f-b199-994bccc3a0e0
-
-<img width="1080" height="1350" alt="IMG_5783" src="https://github.com/user-attachments/assets/2b75d2d0-99d2-48e0-a3ed-13adfbd44ed5" />
-<img width="1080" height="1350" alt="IMG_5782" src="https://github.com/user-attachments/assets/68b9c3b9-d74a-4408-b891-a4a63157b1f5" />
-<img width="1080" height="1350" alt="IMG_5781" src="https://github.com/user-attachments/assets/0f4da543-e0ee-4d5e-b58a-8368270a8cd8" />
-<img width="1080" height="1350" alt="IMG_5778" src="https://github.com/user-attachments/assets/968a37b1-8151-4398-86fe-6cb8c70530c0" />
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -670,20 +649,3 @@ updateBackBtn();
 </script>
 </body>
 </html>
-
-https://github.com/user-attachments/assets/afe4319c-bbb8-4ae9-a11f-b8452ac6b04a
-
-
-
-https://github.com/user-attachments/assets/cda8e5d5-7c16-4254-b5de-df49eb0f4b3b
-
-
-
-https://github.com/user-attachments/assets/b5483816-6886-4aba-b666-792d84a6f407
-
-
-
-<img width="1080" height="1350" alt="IMG_5783" src="https://github.com/user-attachments/assets/ee0644b6-b5a9-413b-8289-5b3ff7fa4de1" />
-<img width="1080" height="1350" alt="IMG_5782" src="https://github.com/user-attachments/assets/b2e33b85-cf44-4ded-992f-20932a297954" />
-<img width="1080" height="1350" alt="IMG_5781" src="https://github.com/user-attachments/assets/e126393d-6f2d-4d3f-a44c-8d340d40def6" />
-<img width="1080" height="1350" alt="IMG_5778" src="https://github.com/user-attachments/assets/c5c95e88-749a-42fb-a733-0eab4617164b" />
